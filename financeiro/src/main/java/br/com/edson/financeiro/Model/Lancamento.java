@@ -15,6 +15,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.MAX;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.MIN;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table ( name = "lancamento")
@@ -57,6 +66,8 @@ public class Lancamento implements Serializable {
 		this.id = id;
 	}
 	
+	@NotEmpty
+	@Size (max = 100)
 	@Column (name = "descricao", length = 100, nullable = false)
 	public String getDescricao() {
 		return descricao;
@@ -66,6 +77,8 @@ public class Lancamento implements Serializable {
 		this.descricao = descricao;
 	}
 	
+	@DecimalMin ("0")
+	@DecimalMax ("9999999")
 	@Column (name = "valor", precision = 10, scale = 2, nullable = false)
 	public BigDecimal getValor() {
 		return valor;
@@ -75,7 +88,8 @@ public class Lancamento implements Serializable {
 		this.valor = valor;
 	}
 	
-	@Column (name = "data_vencimento")
+	@NotNull
+	@Column (name = "data_vencimento", nullable = false)
 	@Temporal (TemporalType.DATE)
 	public Date getDataVencimento() {
 		return dataVencimento;
@@ -85,7 +99,7 @@ public class Lancamento implements Serializable {
 		this.dataVencimento = dataVencimento;
 	}
 	
-	@Column (name = "dataPagamento")
+	@Column (name = "dataPagamento" , nullable = true)
 	public Date getDataPagamento() {
 		return dataPagamento;
 	}
@@ -94,6 +108,7 @@ public class Lancamento implements Serializable {
 		this.dataPagamento = dataPagamento;
 	}
 	
+	@NotNull
 	@Column (name = "tipo")
 	@Enumerated (EnumType.STRING)
 	public TipoLancamento getTipo() {

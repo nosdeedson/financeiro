@@ -22,7 +22,7 @@
 		</plugins>
 	</build>
 	<dependencies>
-	<!-- Núcleo do Hibernate -->
+		<!-- Núcleo do Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -41,6 +41,13 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.48</version>
+			<scope>compile</scope>
+		</dependency>
+<!-- 		hibernate validation -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.4.3.Final</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
