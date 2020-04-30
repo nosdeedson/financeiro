@@ -36,7 +36,7 @@ public class Lancamento implements Serializable {
 	private BigDecimal valor;
 	private Date dataVencimento;
 	private Date dataPagamento;
-	private TipoLancamento tipo;
+	private TipoLancamentoEnum tipo;
 	private Pessoa pessoa;
 	
 	public Lancamento() {
@@ -44,7 +44,7 @@ public class Lancamento implements Serializable {
 	}
 	
 	public Lancamento(Long id, String descricao, BigDecimal valor, Date dataVencimento, Date dataPagamento,
-			TipoLancamento tipo, Pessoa pessoa) {
+			TipoLancamentoEnum tipo, Pessoa pessoa) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -111,11 +111,11 @@ public class Lancamento implements Serializable {
 	@NotNull
 	@Column (name = "tipo")
 	@Enumerated (EnumType.STRING)
-	public TipoLancamento getTipo() {
+	public TipoLancamentoEnum getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoLancamento tipo) {
+	public void setTipo(TipoLancamentoEnum tipo) {
 		this.tipo = tipo;
 	}
 	
