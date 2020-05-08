@@ -55,6 +55,13 @@ public class Lancamento implements Serializable {
 		this.pessoa = pessoa;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "Lancamento"+ ", descricao= " + descricao + "\n valor=" + valor + "\n dataVencimento= "
+				+ dataVencimento + "\n dataPagamento=" + dataPagamento + "\n tipo=" + tipo + "\n pessoa=" + pessoa.getNome() + "]";
+	}
+
 	@Id
 	@GeneratedValue
 	@Column (name = "id")

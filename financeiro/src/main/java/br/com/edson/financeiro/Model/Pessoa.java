@@ -31,6 +31,13 @@ public class Pessoa implements Serializable {
 		this.nome = nome;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "Pessoa \n[nome= " + nome + "]";
+	}
+
+
 	@Id
 	@GeneratedValue
 	@Column (name = "id")
