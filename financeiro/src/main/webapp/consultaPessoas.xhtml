@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title></title>
+</h:head>
+
+<f:metadata>
+	<f:viewAction action="#{consultaPessoasMBean.consultarPessoas}"></f:viewAction>
+</f:metadata>
+
+<h:body>
+	<h:form>
+		<p:messages/>
+		<h1>Lista Pessoas</h1>
+		<p:linkButton outcome="consultaLancamentos" value="Ver lançamentos" style="margin-bottom: 20px;"/>
+		<p:dataTable value="#{consultaPessoasMBean.pessoas}" var="pessoa" border="1" cellspacing="0"
+		 cellpading="2" paginator="true" paginatorAlwaysVisible="false" emptyMessage="Lista vazia." rows="5">
+			<p:column headerText="Id" style="text-align: center;"  >
+				<p:outputLabel value="#{pessoa.id}"></p:outputLabel>
+			</p:column>
+			<p:column headerText="Nome Pessoa" style="text-align: center;">
+				<p:outputLabel value="#{pessoa.nome}"></p:outputLabel>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+
+
+</html>

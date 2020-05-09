@@ -43,12 +43,27 @@
 			<version>5.1.48</version>
 			<scope>compile</scope>
 		</dependency>
-<!-- 		hibernate validation -->
+		<!-- hibernate validation -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.4.3.Final</version>
 			<scope>compile</scope>
+		</dependency>
+
+		<!-- JavaServe faces -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>2.2.20</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>7.0</version>
 		</dependency>
 	</dependencies>
 
