@@ -18,10 +18,10 @@
 	</header>
 	<h:form>
 		<p:menubar >
-			<p:menuitem value="Home" icon="ui-icon-home" />
+			<p:menuitem value="Home" icon="ui-icon-home" action="index" url="index.xhtml" />
 			<p:submenu label="Cadastros" icon="ui-icon-plus">
-				<p:menuitem value="Pessoas"/>
-				<p:menuitem value="Lançamentos"/>
+				<p:menuitem value="Pessoas" action="cadastroPessoas" url="cadastroPessoas.xhtml"/>
+				<p:menuitem value="Lançamentos" action="cadastroLancamentos" url="cadastroLancamentos.xhtml"/>
 			</p:submenu>
 			<p:submenu label="Consultas" icon="ui-icon-search">
 				<p:menuitem value="Pessoas" action="consultaPessoas" url="consultaPessoas.xhtml"/>
