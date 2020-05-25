@@ -6,8 +6,8 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" template="WEB-INF/layout.xhtml">
 	
-<f:metadata >
- <f:viewAction action="#"></f:viewAction>
+<f:metadata>
+	<f:viewAction action="#{cadastroLancamentosMBean.preparaCadastros}"></f:viewAction>
 </f:metadata>
 <ui:define name="titulo">Cadastrar Lançamentos</ui:define>
 <ui:define name="conteudo">
@@ -16,26 +16,31 @@
 		<h1>Cadastro lançamentos</h1>
 		<p:panelGrid columns="2" id="pgCadastro"  >
 			<p:outputLabel for="tipo" value="Tipo laçamento"/>
-			<p:selectOneButton id="tipo" required="true" >
-				<f:selectItem itemLabel="Despesa"/>
-				<f:selectItem itemLabel="Receita"/>
+			<p:selectOneButton id="tipo" required="true" value="#{cadastroLancamentosMBean.lancamento.tipo}" >
+				<f:selectItems value="#{cadastroLancamentosMBean.tiposLancamento}" var="tipo" 
+					itemValue="#{tipo}" itemLabel="#{tipo.descricao}"/>
 			</p:selectOneButton>
 			<p:outputLabel for="pessoa" value="Pessoa"/>
-			<p:selectOneMenu id="pessoa" required="true" filterMatchMode="contains" >
+			<p:selectOneMenu id="pessoa" required="true" filter="true" filterMatchMode="contains"
+				value="#{cadastroLancamentosMBean.lancamento.pessoa}">
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroLancamentosMBean.pessoas}" var="pessoa" 
+					 itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"/>
 			</p:selectOneMenu>
 			<p:outputLabel for="descricao" value="Descrição"/>
-			<p:inputText id="descricao" size="40" required="true"/>
+			<p:inputText id="descricao" size="40" required="true" value="#{cadastroLancamentosMBean.lancamento.descricao}"/>
 			<p:outputLabel for="valor" value="Valor"/>
-			<p:inputNumber id="valor" size="40" required="true">
+			<p:inputText id="valor" size="40" value="#{cadastroLancamentosMBean.lancamento.valor}" required="true" >
 				<f:convertNumber locale="pt_BR" type="currency" maxFractionDigits="2" minFractionDigits="2"/>
-			</p:inputNumber>
+			</p:inputText>
 			<p:outputLabel value="Data Vencimento" for="data_vence" />
-			<p:calendar id="data_vence" required="true" pattern="dd/MM/yyyy" locale="pt_BR"/>
+			<p:calendar id="data_vence" required="true" pattern="dd/MM/yyyy" locale="pt_BR" 
+				value="#{cadastroLancamentosMBean.lancamento.dataVencimento}"/>
 			<p:outputLabel value="Data pagamento" for="data_pag"/>
-			<p:calendar id="data_pag" pattern="dd/MM/yyyy" locale="pt_BR"/>
+			<p:calendar id="data_pag" pattern="dd/MM/yyyy" locale="pt_BR" 
+				value="#{cadastroLancamentosMBean.lancamento.dataPagamento}"/>
 			<p:outputLabel/>
-			<p:commandButton value="Salvar" update="frm"/>
+			<p:commandButton value="Salvar" update="frm" action="#{cadastroLancamentosMBean.salvar}"/>
 		
 		</p:panelGrid>
 
