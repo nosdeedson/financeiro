@@ -14,6 +14,7 @@ import javax.persistence.EntityTransaction;
 import br.com.edson.Repository.Pessoas;
 import br.com.edson.Util.JpaUtil;
 import br.com.edson.financeiro.Model.Pessoa;
+import br.com.edson.service.CadastroPessoa;
 
 @ManagedBean
 @ViewScoped
@@ -23,6 +24,9 @@ public class consultaPessoasMBean implements Serializable {
 	
 	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 	private Pessoa pessoaSerExcluida = new Pessoa();
+	
+	private CadastroPessoa cadP;
+	
 	
 	public void consultarPessoas() {
 		EntityManager em = JpaUtil.obterEntity();
@@ -35,18 +39,19 @@ public class consultaPessoasMBean implements Serializable {
 		EntityTransaction et = em.getTransaction();
 		FacesContext context = FacesContext.getCurrentInstance();
 		
-		Pessoas p = new Pessoas(em);
 		try {
 			et.begin();
 			pessoaSerExcluida = new Pessoas(em).porId(pessoaSerExcluida.getId());
-			p.removerPessoa(pessoaSerExcluida);
+			
+			this.cadP = new CadastroPessoa(em);
+			this.cadP.excluirPessoa(pessoaSerExcluida);
 			context.addMessage(null, new FacesMessage("Pessoa excluida com sucesso."));
 			et.commit();
 			this.consultarPessoas();
 		} catch (Exception e) {
 			et.rollback();
-//			e.printStackTrace();
-			FacesMessage msg = new FacesMessage(e.getMessage() + " erro sistema");
+			e.printStackTrace();
+			FacesMessage msg = new FacesMessage(e.getMessage());
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context.addMessage(null, msg);
 		}finally {

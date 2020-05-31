@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.edson.financeiro.Model.Lancamento;
+import br.com.edson.financeiro.Model.Pessoa;
 
 public class Lancamentos implements Serializable{
 /*
@@ -46,6 +47,15 @@ public class Lancamentos implements Serializable{
 		TypedQuery<String> query = this.em.createQuery(consulta, String.class);
 		query.setParameter("descricao", "%"+descricao+"%");
 		return query.getResultList();
+	}
+	
+	public Long pegaLancamentoPorPessoa(Long idPessoa) {
+		String consulta = " select count(l.pessoa.id) from Lancamento l where l.pessoa.id = :id";
+		
+		Long tem  =  (Long) this.em.createQuery(consulta, Long.class)
+				.setParameter("id", idPessoa ).getSingleResult();
+		
+		return tem;
 	}
 	
 	/**
