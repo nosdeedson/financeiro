@@ -26,6 +26,20 @@
 			<p:column headerText="Nome Pessoa" style="text-align: center;">
 				<p:outputLabel value="#{pessoa.nome}"></p:outputLabel>
 			</p:column>
+			<p:column headerText="Ações" width="12%" >
+				<p:button title="Editar" icon="ui-icon-pencil" outcome="/cadastroPessoas">
+					<f:param name="id" value="#{pessoa.id}"/>
+				</p:button>
+				<p:commandButton title="Excluir" icon="ui-icon-trash" action="#{consultaPessoasMBean.excluir}" 
+					update="@form">
+					<f:setPropertyActionListener value="#{pessoa}" target="#{consultaPessoasMBean.pessoaSerExcluida}"/>
+					<p:confirm header="Confirmação" message="Você realmente quer Excluir?" icon="pi pi-exclamation-triangle"/>
+				</p:commandButton>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+				</p:confirmDialog>
+			</p:column>
 		</p:dataTable>
 	</h:form>
 	

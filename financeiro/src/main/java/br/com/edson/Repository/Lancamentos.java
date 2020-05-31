@@ -20,14 +20,54 @@ public class Lancamentos implements Serializable{
 		this.em = em;
 	}
 	
-	/*
-	 * adiciona lacamento
+	/**
+	 * adiciona um lançamento no banco
+	 * @param l
 	 */
-	public void adicionar(Lancamento l) {
-		this.em.persist(l);
+	public void adicionar(Lancamento lancamento) {
+		this.em.persist(lancamento);
 	}
-	/*
-	 * retorna todos os lançamentos
+	/**
+	 * metodo que atualiza e edita
+	 * @param l
+	 */
+	public void adicionarEditar(Lancamento lancamento) {
+		em.merge(lancamento);
+	}
+	
+	/**
+	 * pegas as descrições existentes no banco
+	 * @param descricao
+	 * @return
+	 */
+	public List<String> pegaDescricao(String descricao){
+		String consulta = " select distinct descricao from Lancamento "
+				+ " where upper(descricao) like upper(:descricao)";
+		TypedQuery<String> query = this.em.createQuery(consulta, String.class);
+		query.setParameter("descricao", "%"+descricao+"%");
+		return query.getResultList();
+	}
+	
+	/**
+	 * busca um laçamento especifico no banco pela id
+	 * @param id
+	 * @return
+	 */
+	public Lancamento buscaLancametnoPorId(Long id) {
+		return em.find(Lancamento.class, id);
+	}
+	
+	/**
+	 * remove um lançamento recebido
+	 * @param lancamento
+	 */
+	public void remover(Lancamento lancamento) {
+		em.remove(lancamento);
+	}
+	
+	/**
+	 * busca todos os lançamentos no banco
+	 * @return
 	 */
 	public List<Lancamento>  todos(){
 		TypedQuery<Lancamento> query = em.createQuery("from Lancamento", Lancamento.class);

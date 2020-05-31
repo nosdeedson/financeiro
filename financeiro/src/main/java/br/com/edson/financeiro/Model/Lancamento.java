@@ -17,12 +17,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.MAX;
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.MIN;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -40,13 +37,10 @@ public class Lancamento implements Serializable {
 	private Pessoa pessoa;
 	
 	public Lancamento() {
-		super();
 	}
 	
-	public Lancamento(Long id, String descricao, BigDecimal valor, Date dataVencimento, Date dataPagamento,
+	public Lancamento(String descricao, BigDecimal valor, Date dataVencimento, Date dataPagamento,
 			TipoLancamentoEnum tipo, Pessoa pessoa) {
-		super();
-		this.id = id;
 		this.descricao = descricao;
 		this.valor = valor;
 		this.dataVencimento = dataVencimento;
@@ -55,12 +49,6 @@ public class Lancamento implements Serializable {
 		this.pessoa = pessoa;
 	}
 	
-	
-	@Override
-	public String toString() {
-		return "Lancamento"+ ", descricao= " + descricao + "\n valor=" + valor + "\n dataVencimento= "
-				+ dataVencimento + "\n dataPagamento=" + dataPagamento + "\n tipo=" + tipo + "\n pessoa=" + pessoa.getNome() + "]";
-	}
 
 	@Id
 	@GeneratedValue

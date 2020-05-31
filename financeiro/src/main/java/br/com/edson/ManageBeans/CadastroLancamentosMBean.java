@@ -40,6 +40,11 @@ public class CadastroLancamentosMBean implements Serializable {
 		
 	}
 	
+	public List<String> pesquisaDescricoes( String descricao){
+		EntityManager em= JpaUtil.obterEntity();
+		return new Lancamentos(em).pegaDescricao(descricao);
+	}
+	
 	public void salvar() {
 		
 		EntityManager em = JpaUtil.obterEntity();
@@ -63,13 +68,6 @@ public class CadastroLancamentosMBean implements Serializable {
 		}
 	}
 	
-	/**
-	 * @author edson
-	 * @return
-	 */
-	public TipoLancamentoEnum[] tiposLancamento() {
-		return TipoLancamentoEnum.values();
-	}
 	
 	public Lancamento getLancamento() {
 		return lancamento;
@@ -81,6 +79,12 @@ public class CadastroLancamentosMBean implements Serializable {
 	public List<Pessoa> getPessoas() {
 		return pessoas;
 	}	
-	
+	/**
+	 * Método que retorna as constantes do seu Enumerado.
+	 * @return
+	 */
+	public TipoLancamentoEnum[] getTiposLancamento() {
+		return TipoLancamentoEnum.values();
+	}
 
 }

@@ -7,11 +7,11 @@
 	xmlns:p="http://primefaces.org/ui" template="WEB-INF/layout.xhtml">
 	
 <f:metadata >
- <f:viewAction action="#{consultaLancamentosMBean.consultar}"></f:viewAction>
+ <f:viewAction action="#{consultaLancamentosMBean.consultar}" />
 </f:metadata>
 <ui:define name="titulo">Lançamentos</ui:define>
 <ui:define name="conteudo">
-	<h:form>
+	<h:form id="frm" >
 		<p:messages/>
 			
 			<p:dataTable value="#{consultaLancamentosMBean.lancamentos}" var="lancamento" border="1" 
@@ -44,9 +44,20 @@
 					<f:convertDateTime pattern="dd/MM/yyyy"/>
 				</p:outputLabel>
 			</p:column>
-			<p:column headerText="Ações" width="12%">
-				<p:button title="Editar" icon="ui-icon-pencil"/>
-				<p:commandButton title="Excluir" icon="ui-icon-trash"/>
+			<p:column headerText="Ações" width="12%" >
+				<p:button title="Editar" icon="ui-icon-pencil" outcome="/cadastroLancamentos">
+					<f:param name="id" value="#{lancamento.id}"/>
+				</p:button>
+								
+				<p:commandButton title="Excluir" icon="ui-icon-trash" action="#{consultaLancamentosMBean.excluir}" 
+					update="@form" >
+					<f:setPropertyActionListener value="#{lancamento}" target="#{consultaLancamentosMBean.lancamentoSerExcluido}"/>
+					<p:confirm header="Confirmação" message="Você realmente quer excluir?" icon="pi pi-exclamation-triangle"/>
+				</p:commandButton>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+				</p:confirmDialog>
 			</p:column>
 			
 			</p:dataTable>

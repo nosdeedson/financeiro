@@ -21,13 +21,9 @@ public class Pessoa implements Serializable {
 
 	
 	public Pessoa() {
-		super();
 	}
 	
-		
-	public Pessoa(Long id, String nome) {
-		super();
-		this.id = id;
+	public Pessoa(String nome) {
 		this.nome = nome;
 	}
 	
